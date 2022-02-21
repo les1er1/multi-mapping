@@ -11,6 +11,8 @@ font = renderCreateFont('Arial', 8, 5)
 local state = true
 
 local mp = {
+    notepad = imgui.new.char[65535](''),
+
     airbreak = false,
     airbreakSpeed = 1.0,
     ------------
@@ -22,6 +24,8 @@ local mp = {
     rotation = 0
 }
 
+local renderWindow = imgui.new.bool(false)
+
 local backgroundDraw = imgui.OnFrame(
     function() return true end,
     function(self)
@@ -30,7 +34,7 @@ local backgroundDraw = imgui.OnFrame(
         local dl = imgui.GetBackgroundDrawList()
         local p = imgui.GetCursorScreenPos()
         renderDrawBoxWithBorder(-2, sh - 30, sw + 3, 30, 0x8F000000, 2, 0xFF000000)
-        dl:AddText(imgui.ImVec2(13, sh - 22), 0xFFFFFFFF, 'MULTI-MAPPING Build #0002');
+        dl:AddText(imgui.ImVec2(13, sh - 22), 0xFFFFFFFF, 'MULTI-MAPPING Build #0003');
         local x, y, z = getCharCoordinates(PLAYER_PED)
         local angle = math.ceil(getCharHeading(PLAYER_PED))
         if mp.airbreak then dl:AddText(imgui.ImVec2(330, sh - 22), 0xFF32CD32, '[ AirBreak ]') else dl:AddText(imgui.ImVec2(330, sh - 22), 0xFFC0C0C0, '[ AirBreak ]') end
@@ -67,6 +71,9 @@ function main()
     imgui.Process = true
     sampRegisterChatCommand('lastobject', function(arg)
         mp.lastobject = arg
+    end)
+    sampRegisterChatCommand('note', function()
+        renderWindow[0] = not renderWindow[0]
     end)
     while true do wait(0)
         if state then
@@ -107,6 +114,7 @@ function main()
                 if isKeyJustPressed(VK_J) then sampSendChat('/ocolor '..mp.lastObject..' 0 0xFFFFFFFF') end
                 if isKeyJustPressed(VK_E) then
                     clipboardText = getClipboardText()
+                    if clipboardText == nil then return end
                     if clipboardText:find('(%d+)') then
                         sampSendChat('/oa '..clipboardText)
                     end
@@ -174,3 +182,16 @@ function sampev.onSendCommand(command)
         mp.lastObject = command:match('oedit (%d+)')
     end
 end
+
+local newFrame = imgui.OnFrame(
+    function() return renderWindow[0] end,
+    function(player)
+        local resX, resY = getScreenResolution()
+        local sizeX, sizeY = 500, 500
+        imgui.SetNextWindowPos(imgui.ImVec2(resX / 2, resY / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
+        imgui.SetNextWindowSize(imgui.ImVec2(sizeX, sizeY), imgui.Cond.FirstUseEver)
+        imgui.Begin('Notepad', renderWindow, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+        imgui.InputTextMultiline('##notepad', mp.notepad, 65535, imgui.ImVec2(-0.1, -0.1))
+        imgui.End()
+   end
+)
