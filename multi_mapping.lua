@@ -48,7 +48,7 @@ local backgroundDraw = imgui.OnFrame(
         }
 
         local rotList = {
-            {'[    90*git commit -m "comment" Rotation   ]', 0xFFC0C0C0},
+            {'[    90* Rotation   ]', 0xFFC0C0C0},
             {'[ 90* Rotation RZ ]', 0xFF32CD32},
             {'[ 90* Rotation RX ]', 0xFF32CD32},
             {'[ 90* Rotation RY ]', 0xFF32CD32}
