@@ -39,7 +39,7 @@ local backgroundDraw = imgui.OnFrame(
 
         renderDrawBoxWithBorder(-2, sh - 30, sw + 3, 30, 0x8F000000, 2, 0xFF000000)
 
-        dl:AddText(imgui.ImVec2(13, sh - 22), 0xFFFFFFFF, 'MULTI-MAPPING Build #0003');
+        dl:AddText(imgui.ImVec2(13, sh - 22), 0xFFFFFFFF, 'MULTI-MAPPING Build #0004');
 
         local locList = {
             {'[       Last Object Clone        ]', 0xFFC0C0C0},
@@ -48,7 +48,7 @@ local backgroundDraw = imgui.OnFrame(
         }
 
         local rotList = {
-            {'[    90* Rotation   ]', 0xFFC0C0C0},
+            {'[    90*git commit -m "comment" Rotation   ]', 0xFFC0C0C0},
             {'[ 90* Rotation RZ ]', 0xFF32CD32},
             {'[ 90* Rotation RX ]', 0xFF32CD32},
             {'[ 90* Rotation RY ]', 0xFF32CD32}
