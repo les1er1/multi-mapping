@@ -25,8 +25,8 @@
 
 <h2>Hotkeys</h2>
 
-<li><code>NUM+ (ADD)</code> - increase the break speed</li>
-<li><code>NUM- (SUBTRACT)</code> - lower the break speed</li>
+<li><code>NUM+ (ADD)</code> - increase the airbreak speed</li>
+<li><code>NUM- (SUBTRACT)</code> - lower the airbreak speed</li>
 <li><code>SPACE</code> - up</li>
 <li><code>SHIFT</code> - downward</li>
 <li><code>Z</code> - Switching state of copying of the last created object (has 3 modes)</li>
@@ -38,7 +38,9 @@
 <li><code>R</code> - rotate the object along the selected axis</li>
 <li><code>J</code> - darken last object</li>
 <li><code>M</code> - activate object selection with the mouse to delete</li>
-<li><code>E</code> - create object with the object ID that will be taken from the clipboard (will work only if there are numbers in the clipboard text)<h2 id="dependencies">Dependencies</h2>
+<li><code>E</code> - create object with the object ID that will be taken from the clipboard (will work only if there are numbers in the clipboard text)
+
+<h2>Dependencies</h2>
 <h3><a href="https://github.com/THE-FYP/mimgui/releases/download/v1.7.0/mimgui-v1.7.0.zip">mimgui</a></h3>
 <h3><a href="https://github.com/THE-FYP/SAMP.Lua/releases/download/v2.3.0/samp-lua-v2.3.0.zip">samp.lua</a></h3>
 </li>
