@@ -52,9 +52,9 @@ local backgroundDraw = imgui.OnFrame(
     local x, y, z = getCharCoordinates(PLAYER_PED)
     local angle = math.ceil(getCharHeading(PLAYER_PED))
 
-    renderDrawBoxWithBorder(-2, sh - 30, sw + 3, 30, 0x8F000000, 2, 0xFF000000)
+    renderDrawBoxWithBorder(-2, sh - 23, sw + 3, 23, 0x8F000000, 2, 0xFF000000)
 
-    dl:AddText(imgui.ImVec2(13, sh - 22), 0xFFFFFFFF, 'MULTI-MAPPING Build #0004');
+    dl:AddText(imgui.ImVec2(13, sh - 19), 0xFFFFFFFF, 'MULTI-MAPPING Build #0004');
 
     local locList = {
       {'[     Last Object Clone    ]', 0xFFC0C0C0},
@@ -69,12 +69,12 @@ local backgroundDraw = imgui.OnFrame(
       {'[ 90* Rotation RY ]', 0xFF32CD32}
     }
 
-    dl:AddText(imgui.ImVec2(330, sh - 22), (mp.airbreak and 0xFF32CD32 or 0xFFC0C0C0), '[ AirBreak ]') -- airbreak
-    dl:AddText(imgui.ImVec2(400, sh - 22), locList[mp.lastObjectClone+1][2], locList[mp.lastObjectClone+1][1]) -- last object clone
-    dl:AddText(imgui.ImVec2(573, sh - 22), (mp.objRender and 0xFF32CD32 or 0xFFC0C0C0), '[ Object ID Render ]') -- obj render
-    dl:AddText(imgui.ImVec2(695, sh - 22), rotList[mp.rotation+1][2], rotList[mp.rotation+1][1]) -- 90 rotation
-    dl:AddText(imgui.ImVec2(180, sh - 22), 0xFFFFFF66, math.round(x, 1)..' '..math.round(y, 1)..' '..math.round(z, 1)..' '..angle)
-    dl:AddText(imgui.ImVec2(sw - 108, sh - 22), 0xFF80BCFF, 'Last object: '..mp.lastObject)
+    dl:AddText(imgui.ImVec2(330, sh - 19), (mp.airbreak and 0xFF32CD32 or 0xFFC0C0C0), '[ AirBreak ]') -- airbreak
+    dl:AddText(imgui.ImVec2(400, sh - 19), locList[mp.lastObjectClone+1][2], locList[mp.lastObjectClone+1][1]) -- last object clone
+    dl:AddText(imgui.ImVec2(573, sh - 19), (mp.objRender and 0xFF32CD32 or 0xFFC0C0C0), '[ Object ID Render ]') -- obj render
+    dl:AddText(imgui.ImVec2(695, sh - 19), rotList[mp.rotation+1][2], rotList[mp.rotation+1][1]) -- 90 rotation
+    dl:AddText(imgui.ImVec2(180, sh - 19), 0xFFFFFF66, math.round(x, 1)..' '..math.round(y, 1)..' '..math.round(z, 1)..' '..angle)
+    dl:AddText(imgui.ImVec2(sw - 108, sh - 19), 0xFF80BCFF, 'Last object: '..mp.lastObject)
 
     if not isSampfuncsConsoleActive() and not sampIsChatInputActive() and not isPauseMenuActive() and not sampIsDialogActive() then
 
@@ -211,8 +211,8 @@ end
 
 function sampev.onServerMessage(color, text)
   if state == false then return end
-  if text:find('Создан объект: (%d+)') then
-    mp.lastObject = text:match('Создан объект: (%d+)')
+  if text:find('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: (%d+)') then
+    mp.lastObject = text:match('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: (%d+)')
   end
 end
 
