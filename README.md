@@ -24,7 +24,7 @@
 
 <h2>Горячие клавиши</h2>
 
-<li><code>LSHIFT</code> - активировать аирбрейк</li>
+<li><code>RSHIFT</code> - активировать аирбрейк</li>
 <li><code>NUM+ (ADD)</code> - повысить скорость аирбрейка</li>
 <li><code>NUM- (SUBTRACT)</code> - понизить скорость аирбрейка</li>
 <li><code>SPACE</code> - вверх</li>
