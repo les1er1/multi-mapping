@@ -26,6 +26,16 @@ u8 = encoding.UTF8
 local font = renderCreateFont('Arial', 8, 5)
 local renderWindow = imgui.new.bool(false)
 
+local inicfg = require 'inicfg'
+
+local ini = inicfg.load({
+  main = {
+    airbreakOff = false
+  }
+}, nil)
+
+inicfg.save(ini, nil)
+
 local function switch_block()
   if isKeyJustPressed(VK_Z) then -- last object clone switch
     if mp.lastObjectClone == 2 then mp.lastObjectClone = 0 return end
@@ -69,7 +79,12 @@ local backgroundDraw = imgui.OnFrame(
       {'[ 90* Rotation RY ]', 0xFF32CD32}
     }
 
-    dl:AddText(imgui.ImVec2(330, sh - 19), (mp.airbreak and 0xFF32CD32 or 0xFFC0C0C0), '[ AirBreak ]') -- airbreak
+    if not ini.main.airbreakOff then
+      dl:AddText(imgui.ImVec2(330, sh - 19), (mp.airbreak and 0xFF32CD32 or 0xFFC0C0C0), '[ AirBreak ]') -- airbreak
+    else
+      dl:AddText(imgui.ImVec2(330, sh - 19), 0xFF696969, '[ AirBreak ]') -- airbreak off
+    end
+
     dl:AddText(imgui.ImVec2(400, sh - 19), locList[mp.lastObjectClone+1][2], locList[mp.lastObjectClone+1][1]) -- last object clone
     dl:AddText(imgui.ImVec2(573, sh - 19), (mp.objRender and 0xFF32CD32 or 0xFFC0C0C0), '[ Object ID Render ]') -- obj render
     dl:AddText(imgui.ImVec2(695, sh - 19), rotList[mp.rotation+1][2], rotList[mp.rotation+1][1]) -- 90 rotation
@@ -127,9 +142,16 @@ local backgroundDraw = imgui.OnFrame(
   end
 )
 
+function load()
+  --
+end
+
 function main()
   while not isSampAvailable() do wait(0) end
   imgui.Process = true
+
+  --load()
+
   sampRegisterChatCommand('lo', function(arg)
     if tonumber(arg) == nil then
       mp.lastObject = 0
@@ -137,13 +159,22 @@ function main()
       mp.lastObject = arg
     end
   end)
+
+  sampRegisterChatCommand('offa', function(arg)
+    ini.main.airbreakOff = not ini.main.airbreakOff
+    sampAddChatMessage('Аирбрейк '..(ini.main.airbreakOff and 'Выключен' or 'Включен'), -1)
+
+    inicfg.save(ini, nil)
+  end)
+
   sampRegisterChatCommand('note', function()
     renderWindow[0] = not renderWindow[0]
   end)
+
   while true do wait(0)
     if state then
       if isKeyJustPressed(VK_RSHIFT) then
-        if not isSampfuncsConsoleActive() and not sampIsChatInputActive() and not isPauseMenuActive() and not sampIsDialogActive() then
+        if not ini.main.airbreakOff and not isSampfuncsConsoleActive() and not sampIsChatInputActive() and not isPauseMenuActive() and not sampIsDialogActive() then
           mp.airbreak = not mp.airbreak
           if mp.airbreak then
             local posX, posY, posZ = getCharCoordinates(playerPed)
@@ -151,15 +182,18 @@ function main()
           end
         end
       end
+
       if isKeyJustPressed(VK_X) then
         if not isSampfuncsConsoleActive() and not sampIsChatInputActive() and not isPauseMenuActive() and not sampIsDialogActive() then
           if mp.lastObjectClone == 1 then sampSendChat('/clone') end
           if mp.lastObjectClone == 2 then sampSendChat('/clone '..mp.lastObject) end
         end
       end
+
       if mp.airbreak then
         al()
       end
+
       if mp.objRender then
         for _, v in pairs(getAllObjects()) do
           if isObjectOnScreen(v) then
@@ -171,6 +205,7 @@ function main()
         end
       end
     end
+
     if isKeyJustPressed(VK_F3) then
       state = not state
       imgui.Process = state
@@ -211,8 +246,8 @@ end
 
 function sampev.onServerMessage(color, text)
   if state == false then return end
-  if text:find('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: (%d+)') then
-    mp.lastObject = text:match('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: (%d+)')
+  if text:find('Создан объект: (%d+)') then
+    mp.lastObject = text:match('Создан объект: (%d+)')
   end
 end
 
