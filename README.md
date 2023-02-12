@@ -1,5 +1,5 @@
 <h1 align="center">multi-mapping</h1>
-<h4 align="center"><a href="./README_EN.md">English</a> | <a href="https://github.com/les1er1/multi-mapping/releases">Скачать</a> | <a href="https://forum.training-server.com/d/13293-multi-mapping-build-0004">Топик на форуме</a></h4>
+<h4 align="center"><a href="https://github.com/les1er1/multi-mapping/releases">Скачать</a> | <a href="https://forum.training-server.com/d/13293-multi-mapping-build-0004">Топик на форуме</a></h4>
 <h3 align="center">Lua скрипт для <a href="https://training-server.com">TRAINING-SERVER</a> в GTA: San Andreas Multiplayer.</h3>
 
 <h2>Команды</h2>
@@ -24,6 +24,7 @@
 
 <h2>Горячие клавиши</h2>
 
+<li><code>LSHIFT</code> - активировать аирбрейк</li>
 <li><code>NUM+ (ADD)</code> - повысить скорость аирбрейка</li>
 <li><code>NUM- (SUBTRACT)</code> - понизить скорость аирбрейка</li>
 <li><code>SPACE</code> - вверх</li>
