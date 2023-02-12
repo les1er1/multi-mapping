@@ -1,5 +1,5 @@
 <h1 align="center">multi-mapping</h1>
-<h4 align="center"><a href="./README_RU.md">Русский</a> | <a href="https://github.com/les1er1/multi-mapping/releases">Download</a> | <a href="https://forum.training-server.com/d/13293-multi-mapping-build-0004">Forum topic</a></h4>
+<h4 align="center"><a href="./README.md">Русский</a> | <a href="https://github.com/les1er1/multi-mapping/releases">Download</a> | <a href="https://forum.training-server.com/d/13293-multi-mapping-build-0004">Forum topic</a></h4>
 <h3 align="center">Lua script for <a href="https://training-server.com">TRAINING-SERVER</a> in GTA: San Andreas Multiplayer.</h3>
 
 <h2>Commands</h2>
